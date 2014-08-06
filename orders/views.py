@@ -1,11 +1,6 @@
 from django import forms
 from django.views.generic.edit import FormView
-
-
-
-def import_data(self):
-    pass
-
+from importer import import_data
 
 
 class UploadFileForm(forms.Form):
