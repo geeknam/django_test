@@ -2,12 +2,20 @@ import io
 import csv
 from orders import models
 
-
 """
+Setup guide:
+1. Generate test data:
+    Stage 1: "manage.py generate_test_data test_data.csv --settings=django_test.settings" - generates 2k lines
+    Stage 2: "manage.py generate_test_data test_data.csv 10000 --settings=django_test.settings" - generates 10k lines
+
+2. Reset database state, do this before every import:
+    manage.py reset test_data.csv --settings=django_test.settings
+
+    
 Deliverables:
 
-    1. Make the code work
-    2. Make it more performant
+    1. Fix the bug, make the code run. 
+    2. Make the import more performant.
     3. Report meaningful errors
 
 """
@@ -20,6 +28,7 @@ def import_data(data):
     ), newline=None)
 
     reader = csv.DictReader(sio, dialect='excel')
+    lines_imported = 0
 
     for row in reader:
         product, created = models.Product.objects.get_or_create(
@@ -32,7 +41,7 @@ def import_data(data):
             email=row['email']
         )
 
-        order, created = models.Order.objects.get_or_create(
+        order, created = models.Order.objects.get_or_create(    
             order_code=row['order_code'],
             address=row['address'],
             city=row['city'],
@@ -46,3 +55,7 @@ def import_data(data):
             quantity=row['quantity']
         )
 
+        if created:
+            lines_imported += 1
+
+    return lines_imported

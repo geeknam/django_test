@@ -1,4 +1,5 @@
 from django.db import models
+from django.template.defaultfilters import slugify
 
 
 class Customer(models.Model):
@@ -22,6 +23,7 @@ class Product(models.Model):
 class Order(models.Model):
 
     order_code = models.CharField(max_length=100, unique=True)
+    slug = models.SlugField(unique=True)
     address = models.CharField(max_length=255)
     city = models.CharField(max_length=255)
     postcode = models.CharField(max_length=10)
@@ -31,6 +33,10 @@ class Order(models.Model):
 
     def __unicode__(self):
         return self.order_code
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.order_code)
+        super(Order, self).save(*args, **kwargs)
 
 
 class OrderItem(models.Model):
