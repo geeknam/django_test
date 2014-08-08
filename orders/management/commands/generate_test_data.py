@@ -28,7 +28,7 @@ class Command(BaseCommand):
             row['email'] = 'johnsmith%d@kgn.io' % i
             row['full_name'] = 'John Smith'
 
-            row['product_code'] = 'SKU%d' % i
+            row['product_code'] = 'SKU%d' % random.randint(1, 500)
             row['product_name'] = 'Apple iPhone 6'
 
             row['order_code'] = 'ORDER%d' % i

@@ -16,8 +16,15 @@ class Command(BaseCommand):
         """
         boots-trap if you know what I mean :)
         """
+        for i in range(30):
+            product = models.Product.objects.create(
+                code='SKU%d' % random.randint(50, 300),
+                name='Apple iPhone 6'
+            )
 
-        for i in range(6, 20, 2):
+
+        # Create some orders
+        for i in range(1, 20):
             
             customer = models.Customer.objects.create(
                 email='johnsmith%d@kgn.io' % i,
