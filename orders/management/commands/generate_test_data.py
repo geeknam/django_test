@@ -5,7 +5,7 @@ import random
 class Command(BaseCommand):
 
     def handle(self, *args, **options):
-        if len(args) > 2:
+        if len(args) < 2:
             num_line = 2000
         else:
             num_line = int(args[1])
