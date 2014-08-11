@@ -10,7 +10,7 @@ class Command(BaseCommand):
         models.Order.objects.all().delete()
 
         # Bootstrap initial data that will produce errors
-        # self.bootstrap()
+        self.bootstrap()
 
     def bootstrap(self):
         """
