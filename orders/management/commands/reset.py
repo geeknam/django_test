@@ -2,6 +2,7 @@ from django.core.management.base import BaseCommand
 from orders import models
 import random
 
+
 class Command(BaseCommand):
     def handle(self, *args, **options):
         # Removes current data
@@ -10,7 +11,7 @@ class Command(BaseCommand):
         models.Order.objects.all().delete()
 
         # Bootstrap initial data that will produce errors
-        # self.bootstrap()
+        self.bootstrap()
 
     def bootstrap(self):
         """
@@ -22,10 +23,9 @@ class Command(BaseCommand):
                 name='Apple iPhone 6'
             )
 
-
         # Create some orders
         for i in range(1, 20):
-            
+
             customer = models.Customer.objects.create(
                 email='johnsmith%d@kgn.io' % i,
                 full_name = 'John Smith'
