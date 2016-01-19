@@ -9,6 +9,7 @@ class Command(BaseCommand):
         models.Customer.objects.all().delete()
         models.Product.objects.all().delete()
         models.Order.objects.all().delete()
+        models.OrderItem.objects.all().delete()
 
         # Bootstrap initial data that will produce errors
         self.bootstrap()
@@ -19,7 +20,7 @@ class Command(BaseCommand):
         """
         for i in range(30):
             product = models.Product.objects.create(
-                code='SKU%d' % random.randint(50, 300),
+                code='SKU%d' % (i + 30),
                 name='Apple iPhone 6'
             )
 

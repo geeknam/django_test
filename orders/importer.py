@@ -9,7 +9,7 @@ Setup guide:
     Stage 2: "manage.py generate_test_data test_data.csv 10000 --settings=django_test.settings" - generates 10k lines
 
 2. Reset database state, do this before every import:
-    manage.py reset test_data.csv --settings=django_test.settings
+    manage.py reset --settings=django_test.settings
 
     
 Deliverables:
@@ -41,7 +41,7 @@ def import_data(data):
             email=row['email']
         )
 
-        order, created = models.Order.objects.get_or_create(    
+        order, created = models.Order.objects.get_or_create(
             order_code=row['order_code'],
             address=row['address'],
             city=row['city'],
